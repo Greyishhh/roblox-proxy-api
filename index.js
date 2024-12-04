@@ -14,8 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const axios_1 = __importDefault(require("axios"));
+const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
+app.get('/docs', (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, 'docs', 'docs.html'));
+});
+// hi chat
 // Proxy request to Roblox with dynamic URL and parameters
 app.use('/:service/*', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { service } = req.params; // Service name (e.g., inventory, users, etc.)
