@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy API Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Proxy API Documentation</h1>
+        <p>Use this proxy to interact with Roblox services through a dynamic URL and parameters.</p>
+    </header>
+
+    <section class="api-details">
+        <h2>Overview</h2>
+        <p>This proxy allows you to send requests to Roblox's API through our server. You can interact with different Roblox services such as <strong>inventory</strong>, <strong>users</strong>, and more, by specifying the service in the URL.</p>
+    </section>
+
+    <section class="api-endpoint">
+        <h2>API Endpoint</h2>
+        <p>To use the proxy, send a request to the following endpoint:</p>
+        <pre><code>GET /:service/*</code></pre>
+        <p>Where <code>:service</code> is the name of the Roblox service (e.g., <strong>inventory</strong>, <strong>users</strong>) and the rest of the path is dynamic. The parameters for the request should be appended as query parameters, such as:</p>
+        <pre><code>?sortOrder=asc&limit=10</code></pre>
+    </section>
+
+    <section class="api-example">
+        <h2>Example Usage</h2>
+        <p>For example, if you want to fetch data from the Roblox inventory service for a specific asset:</p>
+        <pre><code>GET /inventory/assets/21070012/owners?limit=5</code></pre>
+        <p>This will fetch the owners of the asset with ID <code>21070012</>, limited to 5 results.</p>
+    </section>
+
+    <section class="error-handling">
+        <h2>Error Handling</h2>
+        <p>If something goes wrong, such as an issue with Roblox's servers or an invalid request, the proxy will return appropriate error messages. A general error message will be displayed if the proxy fails to connect.</p>
+    </section>
+
+    <footer>
+        <p>For more information, please refer to the <a href="https://roblox.com" target="_blank">official Roblox API documentation</a>.</p>
+    </footer>
+</body>
+</html>
