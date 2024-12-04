@@ -1,9 +1,17 @@
 import express, { Request, Response } from 'express';
 import axios, { AxiosResponse } from 'axios';
+import path from 'path';
+
 
 const app = express();
 
 app.use(express.json());
+
+app.get('/docs', (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, 'docs', 'docs.html'));
+});
+
+// hi chat
 
 // Proxy request to Roblox with dynamic URL and parameters
 app.use('/:service/*', async (req: Request, res: Response) => {
