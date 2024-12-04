@@ -17,6 +17,7 @@ const axios_1 = __importDefault(require("axios"));
 const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
+app.use('/docs', express_1.default.static(path_1.default.join(__dirname, 'docs')));
 app.get('/docs', (req, res) => {
     res.sendFile(path_1.default.join(__dirname, 'docs', 'docs.html'));
 });

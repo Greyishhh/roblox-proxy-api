@@ -7,9 +7,13 @@ const app = express();
 
 app.use(express.json());
 
+app.use('/docs', express.static(path.join(__dirname, 'docs')));
+
 app.get('/docs', (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, 'docs', 'docs.html'));
 });
+
+
 
 // hi chat
 

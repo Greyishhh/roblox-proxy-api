@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proxy API Documentation</title>
+    <title>Wolf Proxy API Documentation</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Include Prism.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css">
 </head>
 <body>
     <header>
@@ -28,17 +30,88 @@
     <section class="api-example">
         <h2>Example Usage</h2>
         <p>For example, if you want to fetch data from the Roblox inventory service for a specific asset:</p>
-        <pre><code>GET /inventory/assets/21070012/owners?limit=5</code></pre>
-        <p>This will fetch the owners of the asset with ID <code>21070012</>, limited to 5 results.</p>
+        <details>
+            <summary>Click to view Example Code</summary>
+            <pre><code>GET /inventory/assets/21070012/owners?limit=5</code></pre>
+        </details>
+        <p>This will fetch the owners of the asset with ID <code>21070012</code>, limited to 5 results.</p>
     </section>
 
+    <section class="api-json-example">
+        <h2>JSON Response Example</h2>
+        <p>The response from the proxy will be in JSON format. For example:</p>
+        <details>
+            <summary>Click to view JSON Response</summary>
+            <pre><code>{
+    "data": [
+        { "userId": 123456789, "username": "PlayerOne" },
+        { "userId": 987654321, "username": "PlayerTwo" }
+    ],
+    "status": "success"
+}</code></pre>
+        </details>
+    </section>
+
+    <section class="api-lua-example">
+        <h2>Lua Code Example</h2>
+        <p>Here's a step-by-step guide to using the Proxy API in Roblox with Lua:</p>
+        <ol>
+            <li><strong>Step 1:</strong> Get the `HttpService` in Roblox.</li>
+            <li><strong>Step 2:</strong> Define a function to fetch the data from your API.</li>
+            <li><strong>Step 3:</strong> Send the `GET` request with the necessary parameters (like asset ID and limit).</li>
+            <li><strong>Step 4:</strong> Parse the JSON response and process the data.</li>
+        </ol>
+        <p>Here’s the Lua code to use your proxy API:</p>
+        <details>
+            <summary>Click to view Lua Code</summary>
+            <pre><code class="language-lua">
+local HttpService = game:GetService("HttpService")
+
+-- Function to get inventory owners of an asset
+local function getInventoryOwners(assetId, limit)
+    -- Construct the API URL
+    local url = "http://your_self_hosted_website/inventory/assets/" .. assetId .. "/owners?limit=" .. limit
+
+    -- Send a GET request to the proxy API
+    local response = HttpService:GetAsync(url)
+
+    -- Decode the JSON response
+    local data = HttpService:JSONDecode(response)
+
+    -- Check if the response status is 'success'
+    if data.status == "success" then
+        -- Iterate through the owners and print their usernames
+        for _, player in ipairs(data.data) do
+            print(player.username)
+        end
+    else
+        print("Error: " .. data.status)
+    end
+end
+
+-- Example usage: Get owners of asset with ID 21070012 and limit to 5
+getInventoryOwners(21070012, 5)
+</code></pre>
+        </details>
+        <p><strong>Explanation:</strong></p>
+        <ul>
+            <li>The code uses `HttpService:GetAsync(url)` to make the request to your API.</li>
+            <li>The response is in JSON format, which is decoded using `HttpService:JSONDecode(response)`.</li>
+            <li>The function checks if the status is "success" and prints out the usernames of the asset owners.</li>
+        </ul>
+    </section>
+
+    <h2>Error Handling</h2>
     <section class="error-handling">
-        <h2>Error Handling</h2>
         <p>If something goes wrong, such as an issue with Roblox's servers or an invalid request, the proxy will return appropriate error messages. A general error message will be displayed if the proxy fails to connect.</p>
     </section>
 
     <footer>
         <p>For more information, please refer to the <a href="https://roblox.com" target="_blank">official Roblox API documentation</a>.</p>
+        <p>Created & Hosted by WOLF</p>
     </footer>
+
+    <!-- Include Prism.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 </body>
 </html>
